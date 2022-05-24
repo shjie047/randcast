@@ -1,0 +1,16 @@
+[package]
+name = "client"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "1.0", features = [ "rt-multi-thread", "time", "fs", "macros", "net",] }
+tonic = "0.7.2"
+dkg = { path = "../gen/rust", features = ["dkg_v1"]}
+num = "0.4.0"
+
+[[bin]]
+name = "dkg"
+path = "src/main.rs"

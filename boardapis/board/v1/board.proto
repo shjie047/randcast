@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package board.v1;
+option go_package = "proto/board";
+
+service BoardService {
+  rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse) {}
+  rpc Unsubscribe(UnsubscribeRequest) returns (UnsubscribeResponse) {}
+}
+
+message UnsubscribeRequest {
+  uint32 id = 1;
+}
+message UnsubscribeResponse {
+  string data = 1;
+}
+
+message SubscribeRequest {
+  uint32 id = 1;
+  string bcast = 2;
+}
+
+message SubscribeResponse {
+  uint32 id = 1;
+  string bcast = 2;
+}
+
+message SendVertifiersRequest {
+  string vertifiers = 1;
+  uint32 limit = 2;
+}

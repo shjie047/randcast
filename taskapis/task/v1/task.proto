@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package task.v1;
+option go_package = "proto/task";
+
+import "google/api/annotations.proto";
+
+service TaskService {
+  rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse) {}
+  rpc Unsubscribe(UnsubscribeRequest) returns (UnsubscribeResponse) {}
+  rpc NewTask(NewTaskRequest) returns (NewTaskResponse) {
+    option (google.api.http) = {
+      get: "/sig"
+    };
+  }
+}
+
+message NewTaskRequest {}
+
+message NewTaskResponse {
+  string data = 1;
+}
+
+message UnsubscribeRequest {
+  uint32 id = 1;
+}
+message UnsubscribeResponse {
+  string data = 1;
+}
+
+message SubscribeRequest {
+  uint32 id = 1;
+}
+
+message SubscribeResponse {
+  uint32 threshold = 1;
+  uint32 limit = 2;
+  string msg = 3;
+  string task_id = 4;
+}

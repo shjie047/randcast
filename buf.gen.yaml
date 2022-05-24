@@ -1,0 +1,24 @@
+version: v1
+plugins:
+  - name: go
+    out: gen/go
+    opt: paths=source_relative
+  - name: go-grpc
+    out: gen/go
+    opt: paths=source_relative
+  - name: grpc-gateway
+    out: gen/go
+    opt: paths=source_relative
+  - name: prost
+    out: gen/rust/src
+    opt:
+      - compile_well_known_types
+  - name: tonic
+    out: gen/rust/src
+    opt:
+      - compile_well_known_types
+  - name: prost-crate
+    out: gen/rust
+    strategy: all
+    opt:
+      - gen_crate=Cargo.client.toml.tpl

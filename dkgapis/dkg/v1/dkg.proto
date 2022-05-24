@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package dkg.v1;
+option go_package = "proto/dkg";
+
+service DkgService {
+  rpc StartDkg(StartDkgRequest) returns (StartDkgResponse) {}
+  rpc SendShares(SendSharesRequest) returns (SendSharesResponse) {}
+}
+
+message SendSharesRequest {
+  string shares = 1;
+}
+
+message SendSharesResponse {
+  State state = 1;
+}
+
+message StartDkgRequest {
+  uint32 threshold = 1;
+  uint32 id = 2;
+  string msg = 3;
+  repeated uint32 others = 4;
+}
+
+message StartDkgResponse {
+  State state = 1;
+}
+
+enum State {
+  OK = 0;
+  FAILED = 1;
+}
